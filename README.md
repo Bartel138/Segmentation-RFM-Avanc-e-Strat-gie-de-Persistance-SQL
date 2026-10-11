@@ -8,6 +8,7 @@ Sous-requêtes corrélées : Mise en place de liaisons dynamiques (WHERE p.custo
 Modélisation de données et typage : Manipulation des types INT et VARCHAR, gestion de colonnes persistantes et structuration d'un score agrégé sur 15.
 Traduction Métier : Traduction de scores quantitatifs en segments comportementaux alignés avec une stratégie e-commerce (VIP, Fidèles, Occasionnels, Dormants).
 
+
 -- =========================================================================
 -- 1. Récence (Recency)
 -- =========================================================================
@@ -26,7 +27,6 @@ SET c.recency_score = (
     WHERE p.customer_id = c.customer_id
 );
 
-
 -- =========================================================================
 -- 2. Fréquence (Frequency)
 -- =========================================================================
@@ -43,7 +43,6 @@ SET c.frequency_score = (
     FROM payment p
     WHERE p.customer_id = c.customer_id
 );
-
 
 -- =========================================================================
 -- 3. Montant (Monetary)
@@ -63,7 +62,6 @@ SET c.monetary_score = (
     WHERE p.customer_id = c.customer_id
 );
 
-
 -- =========================================================================
 -- 4. Score Global
 -- =========================================================================
@@ -72,7 +70,6 @@ ADD COLUMN global_score INT;
 
 UPDATE customer 
 SET global_score = recency_score + frequency_score + monetary_score;
-
 
 -- =========================================================================
 -- 5. Segment Client
@@ -86,4 +83,5 @@ SET customer_segment = CASE
     WHEN global_score BETWEEN 10 AND 12 THEN 'Fidèles'
     WHEN global_score BETWEEN 6 AND 9 THEN 'Occasionnels'
     ELSE 'Dormants'
-END;
+END;  
+
