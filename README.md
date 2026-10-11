@@ -1,14 +1,21 @@
-# Segmentation-RFM-Avanc-e-Strat-gie-de-Persistance-SQL
-Conception et implémentation d'un modèle de segmentation client RFM (Récence, Fréquence, Montant) de bout en bout en SQL
-Ce projet intègre une approche de persistance des données pour stocker directement les scores individuels, le score global et les segments marketing qualitatifs dans la table client, optimisant ainsi les ciblages CRM.
+# Segmentation RFM Avancée & Stratégie de Persistance SQL
 
-Compétences Validées
-Requêtes analytiques et agrégations : Utilisation de MAX, COUNT, SUM et de la fonction DATEDIFF pour analyser le comportement d'achat.
-Sous-requêtes corrélées : Mise en place de liaisons dynamiques (WHERE p.customer_id = c.customer_id) pour injecter des métriques calculées dans une table principale.
-Modélisation de données et typage : Manipulation des types INT et VARCHAR, gestion de colonnes persistantes et structuration d'un score agrégé sur 15.
-Traduction Métier : Traduction de scores quantitatifs en segments comportementaux alignés avec une stratégie e-commerce (VIP, Fidèles, Occasionnels, Dormants).
+## Description du Projet
+Conception et implémentation d'un modèle de segmentation client RFM (Récence, Fréquence, Montant) de bout en bout en SQL. Ce projet intègre une approche de persistance des données pour stocker directement les scores individuels, le score global et les segments marketing qualitatifs dans la table client, optimisant ainsi les ciblages CRM.
 
+---
 
+## Compétences Validées
+* **Requêtes analytiques et agrégations :** Utilisation de `MAX`, `COUNT`, `SUM` et de la fonction `DATEDIFF` pour analyser le comportement d'achat.
+* **Sous-requêtes corrélées :** Mise en place de liaisons dynamiques (`WHERE p.customer_id = c.customer_id`) pour injecter des métriques calculées dans une table principale.
+* **Modélisation de données et typage :** Manipulation des types `INT` et `VARCHAR`, gestion de colonnes persistantes et structuration d'un score agrégé sur 15.
+* **Traduction Métier :** Traduction de scores quantitatifs en segments comportementaux alignés avec une stratégie e-commerce (`VIP`, `Fidèles`, `Occasionnels`, `Dormants`).
+
+---
+
+## Script SQL Complet et Structuré
+
+```sql
 -- =========================================================================
 -- 1. Récence (Recency)
 -- =========================================================================
@@ -83,5 +90,4 @@ SET customer_segment = CASE
     WHEN global_score BETWEEN 10 AND 12 THEN 'Fidèles'
     WHEN global_score BETWEEN 6 AND 9 THEN 'Occasionnels'
     ELSE 'Dormants'
-END;  
-
+END;
